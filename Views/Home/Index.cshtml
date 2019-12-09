@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+            </div>
+
+            <div class="col">
+                <form>
+                    <div class="form-group">
+                        <input class="form-control" aria-describedby="userHelp" placeholder="Type Username">
+                        <small id="help" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Enter</button>
+                </form>
+            </div>
+
+            <div class="col"></div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
