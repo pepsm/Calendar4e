@@ -11,7 +11,7 @@ namespace Calendar4e.Models
         public string name { get; set; }
         public string themeColor { get; set; }
         public string enrollmentDate { get; set; }
-        public virtual ICollection<Event> events { get; set; }
+        public virtual ICollection<Task> tasks { get; set; }
         public bool isActive { get; set; }
     }
 }

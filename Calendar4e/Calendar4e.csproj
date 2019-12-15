@@ -127,14 +127,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Data\EventContext.cs" />
+    <Compile Include="Data\TaskContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Data\EventInitializer.cs" />
-    <Compile Include="Models\Event.cs" />
+    <Compile Include="Data\TaskInitializer.cs" />
+    <Compile Include="Models\Task.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -257,11 +257,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Events\Create.cshtml" />
-    <Content Include="Views\Events\Delete.cshtml" />
-    <Content Include="Views\Events\Details.cshtml" />
-    <Content Include="Views\Events\Edit.cshtml" />
-    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\Delete.cshtml" />
+    <Content Include="Views\Task\Details.cshtml" />
+    <Content Include="Views\Task\Edit.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -10,12 +10,11 @@ namespace Calendar4e.Controllers
 {
     public class HomeController : Controller
     {
-        private EventContext db = new EventContext();
+        private TaskContext db = new TaskContext();
         public ActionResult Index()
         {
             return View();
         }
-
 
         // POST: Home/Index
         [HttpPost]
@@ -34,7 +33,7 @@ namespace Calendar4e.Controllers
                 }
                 db.Students.Add(@student);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Events"); 
+                return RedirectToAction("Index", "Tasks"); 
             }
             return View("Index");
         }
