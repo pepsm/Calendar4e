@@ -46,8 +46,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
 
-    <!-- JS for the calendar -->
-    <script type="text/javascript" src="~/Scripts/customcalendar-js/calendar-index.js"></script>
+    <!-- JS for the calendar  <script type="text/javascript" src="~/Scripts/customcalendar-js/calendar-index.js"></script> -->
+   <script>
+       $(document).ready(function () {
+
+        $('#calendar').fullCalendar({
+            header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                allDayDefault: false,
+                firstDay: 1,
+                slotMinutes: 15,
+                events: '@Url.RouteUrl(new{ action="GetEvents", controller="Events"})',
+
+
+                eventRender: function (event, element) {
+                    element.find('.fc-content').append("<br/>" + event.description);
+                    element.find('.fc-title').append("<br/>" + event.subject);
+                }
+
+            });
+        });
+
+   </script>
 
 
 

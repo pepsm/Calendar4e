@@ -26,7 +26,7 @@ namespace Calendar4e.Data
                 new Event{subject="subject3", StudentId = 1,description="description", start=DateTime.Parse("2019-12-07 02:50 PM").ToString("yyyy-MM-ddTHH:mm"), end=DateTime.Parse("2019-12-09 03:50 PM").ToString("yyyy-MM-ddTHH:mm")},
 
             };
-                events.ForEach(s => context.Events.Add(s));
+                events.ForEach(e => context.Events.Add(e));
                 context.SaveChanges();
 
             }

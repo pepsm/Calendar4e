@@ -11,6 +11,7 @@ namespace Calendar4e.Controllers
     public class HomeController : Controller
     {
         private EventContext db = new EventContext();
+        //get
         public ActionResult Index()
         {
             return View();
