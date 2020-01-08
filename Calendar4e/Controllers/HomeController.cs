@@ -10,46 +10,94 @@ namespace Calendar4e.Controllers
 {
     public class HomeController : Controller
     {
-        private EventContext db = new EventContext();
-
-        public ActionResult Index()
+        private TaskContext db = new TaskContext();
+        public ActionResult Login()
         {
             return View();
         }
 
+        // POST: Home/Index
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login([Bind(Include = "Username,Password")] Student @student)
+        {
+            if (ModelState.IsValid)
+            {
+                // this is login, but without registration
+
+                @student.ThemeColor = "red";
+                @student.EnrollmentDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                using (TaskContext db = new TaskContext())
+                {
+                    var obj = db.Students.Where(s => s.Username.Equals(@student.Username) &&
+                    s.Password.Equals(student.Password)).FirstOrDefault();
+
+                    if (obj != null)
+                    {
+                        Session["UserID"] = obj.StudentID.ToString();
+                        Session["Username"] = obj.Username.ToString();
+                        Session["Student"] = obj;
+                        return RedirectToAction("Index", "Task");
+
+                    }
+                }
+            }
+
+            @ViewBag.Error = "Invalid username or password!";
+            return View("Login");
+        }
+        public ActionResult Register()
+        {
+                return View();
+        }
 
         // POST: Home/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "name")] Student @student)
+        public ActionResult Register([Bind(Include = "Username,Password")] Student @student)
         {
             if (ModelState.IsValid)
             {
-                @student.isActive = true;
-                @student.themeColor = "red";
-                @student.enrollmentDate = DateTime.Now.ToString("yyyy-MM-dd T HH:mm");
-
-                if (Exists(@student))
+                using (TaskContext db = new TaskContext())
                 {
-                    @ViewBag.Error = "Pick a different name";
-                    return View("Index");
+                    if (this.GetStudentByName(student.Username) == null) 
+                    {
+                        Student s = new Student
+                        {
+                            Username = student.Username,
+                            Password = student.Password,
+                            EnrollmentDate = DateTime.Now.ToString("yyyy-MM-ddThh:mm tt"),
+                            ThemeColor = "purple",
+                            IsActive = true
+                        };
+
+
+                        db.Students.Add(s);
+                        db.SaveChanges();
+                        return View("Login");
+                    }
+                    else
+                    {
+                        @ViewBag.Error = "User in use. Try with another one!";
+                        return View("Register");
+                    }
+                    
                 }
-                db.Students.Add(@student);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Events"); 
+
             }
-            return View("Index");
+            return View();
         }
 
 
-        private bool Exists(Student student)
+            private Student GetStudentByName(string name)
         {
-            List<Student> list = db.Students.ToList();
-            foreach (var s in list)
+            foreach (var s in db.Students.ToList())
             {
-                if (s.name == student.name) return true;
+                if (s.Username == name) return s;
             }
-            return false;
+            return null;
         }
+
     }
 }
