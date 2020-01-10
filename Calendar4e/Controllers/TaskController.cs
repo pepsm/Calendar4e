@@ -16,9 +16,15 @@ namespace Calendar4e.Controllers
         {
             return View();
         }
+        public ActionResult Logout()
+        {
+            Session["Username"] = null;
+            Session.Abandon();
+            return RedirectToAction("Login", "Home");
 
+        }
 
-        public JsonResult GetTasks()
+            public JsonResult GetTasks()
         {
             db.Configuration.ProxyCreationEnabled = false;
                 var tasks = db.Tasks.ToArray();

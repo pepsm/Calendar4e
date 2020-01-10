@@ -7,3 +7,15 @@
     color: whitesmoke;
 }
 
+.text-warning
+{
+    color: red;
+    font-size: 16px;
+}
+.text-warning a
+{
+    text-decoration: none;
+}
+.text-warning a :hover{
+    color: black;
+}

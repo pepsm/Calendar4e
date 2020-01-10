@@ -17,8 +17,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
     <script src="https://kit.fontawesome.com/03cf08f72f.js" crossorigin="anonymous"></script>
     <!-- CSS Custom -->
-    <link rel="stylesheet" href="~/Content/customcss/footer-calendar.css" />
     <link rel="stylesheet" href="~/Content/customcss/custom-calendar.css" />
+    <link rel="stylesheet" href="~/Content/customcss/footer-calendar.css" />
+    @section Styles {
+        <link href="@Url.Content("~/Content/customcss/footer-calendar.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/customcss/custom-calendar.css")" rel="stylesheet" type="text/css" />
+    }
 </head>
 <body>
 
@@ -27,6 +31,7 @@
         <div class="container">
             <h4>
                 Welcome <b>@Session["Username"].ToString()</b> !
+                <span>@Html.ActionLink("Logout", "Logout")</span>
             </h4>
         </div>
     }
@@ -35,11 +40,37 @@
         <div id='calendar'></div>
     </div>
 
+    <!-- calendar modal -->
+    <div id="modal-view-event" class="modal modal-top fade calendar-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <span class="event-id">TaskID</span>
+                    <h4 class="modal-title"><span class="event-subject"></span></h4>
+                    <div class="event-body"></div>
+                    <span class="event-start">date</span>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-warning">Are you sure you want to delete it? <a class="event-del" href="/Task/Delete/0">Yes</a>   or      <a data-dismiss="modal">No</a> </p>
+                    <br />
+                    <a class="btn btn-danger event-del" onclick="">Delete</a>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
 
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- bottom navbar-->
     <nav class="navbar navbar-fixed-bottom">
         <div class="container-fluid">
             <div class="nav navbar-nav navbar-right">
                 <button type="button" class="btn btn-danger" aria-pressed="false" data-toggle="modal" data-target=".bd-example-modal-lg" autocomplete="off">Create Task</button>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <button type="button" class="btn btn-danger" aria-pressed="false" data-toggle="modal" data-target=".bd-complaint-modal-lg" autocomplete="off">Complaint</button>
             </div>
         </div>
     </nav>
@@ -72,17 +103,22 @@
                 slotMinutes: 15,
                 events: '@Url.RouteUrl(new{ action="GetTasks", controller="Task"})',
                 eventRender: function (event, element) {
-                    element.find('.fc-content').append("<br/>" + event.description);
-                    element.find('.fc-title').append("<br/>" + event.subject);
+                    element.find('.fc-title').append(" " + event.subject);
+                },
+                timeFormat: 'h:mm',
+                eventClick: function (event, jsEvent, view) {
+					jQuery('.event-subject').html(event.subject);
+					jQuery('.event-body').html(event.description);
+                    jQuery('#modal-view-event').modal();
+                    jQuery('.event-id').html(event.TaskID);
+                    jQuery('.event-del').attr("href", "/Task/Delete/" + event.TaskID);
+                    jQuery('.event-start').html(event.start);
                 }
-            
             });
         });
     </script>
 
-
-    <!--Url.RouteUrl(new{ action="GetTasks", controller="Task"}) -->
-    <!-- Bootstrap modal -->
+    <!-- Create Task Model -->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -100,7 +136,7 @@
                             <hr />
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group">
-                               <label class="control-label col-md-2 text-uppercase">Subject</label>
+                                <label class="control-label col-md-2 text-uppercase">Subject</label>
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.subject, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.subject, "", new { @class = "text-danger" })
@@ -153,12 +189,88 @@
                     <div>
                         @Html.ActionLink("Back to List", "Index")
                     </div>
-                    <br/>
+                    <br />
                 </div>
 
             </div>
         </div>
     </div>
 
+    <!-- Create Complaint Model -->
+    <div class="modal fade bd-complaint-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeComplaintModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="container-fluid">
+
+                    <h2>Complaint</h2>
+
+
+                    @using (Html.BeginForm("Create", "Task", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <h4>Task</h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <label class="control-label col-md-2 text-uppercase">Subject</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.subject, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.subject, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <label class="control-label col-md-2 text-uppercase">Description</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.start, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.start, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.start, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.end, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.end, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.end, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.allDay, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.allDay)
+                                        @Html.ValidationMessageFor(model => model.allDay, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                    <br />
+                </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>

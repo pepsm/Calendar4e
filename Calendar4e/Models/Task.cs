@@ -15,12 +15,9 @@ namespace Calendar4e.Models
         public String description { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{yyyy-MM-ddThh\\:mm tt}", ApplyFormatInEditMode = true)]
         public String start { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{yyyy-MM-ddThh\\:mm tt}", ApplyFormatInEditMode = true)]
-
         public String end { get; set; }
         
         public bool allDay { get; set; } = false;
