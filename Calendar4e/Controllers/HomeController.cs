@@ -23,23 +23,21 @@ namespace Calendar4e.Controllers
         {
             if (ModelState.IsValid)
             {
-                // this is login, but without registration
-
-                @student.ThemeColor = "red";
-                @student.EnrollmentDate = DateTime.Now.ToString("yyyy-MM-dd");
-
+                
                 using (TaskContext db = new TaskContext())
                 {
-                    var obj = db.Students.Where(s => s.Username.Equals(@student.Username) &&
-                    s.Password.Equals(student.Password)).FirstOrDefault();
+                    var obj = db.Students.Where(s => s.Username.Equals(@student.Username)).FirstOrDefault();
 
+                    
                     if (obj != null)
                     {
-                        Session["UserID"] = obj.StudentID.ToString();
-                        Session["Username"] = obj.Username.ToString();
-                        Session["Student"] = obj;
-                        return RedirectToAction("Index", "Task");
-
+                        if (Hashing.ValidatePassword(student.Password, obj.Password) == true)
+                        {
+                            Session["UserID"] = obj.StudentID.ToString();
+                            Session["Username"] = obj.Username.ToString();
+                            Session["Student"] = obj;
+                            return RedirectToAction("Index", "Task");
+                        }
                     }
                 }
             }
@@ -52,7 +50,7 @@ namespace Calendar4e.Controllers
                 return View();
         }
 
-        // POST: Home/Index
+        // POST: Home/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Include = "Username,Password")] Student @student)
@@ -66,7 +64,7 @@ namespace Calendar4e.Controllers
                         Student s = new Student
                         {
                             Username = student.Username,
-                            Password = student.Password,
+                            Password = Hashing.HashPassword(student.Password),
                             EnrollmentDate = DateTime.Now.ToString("yyyy-MM-ddThh:mm tt"),
                             ThemeColor = "purple",
                             IsActive = true
@@ -90,7 +88,7 @@ namespace Calendar4e.Controllers
         }
 
 
-            private Student GetStudentByName(string name)
+        private Student GetStudentByName(string name)
         {
             foreach (var s in db.Students.ToList())
             {

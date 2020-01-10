@@ -15,7 +15,7 @@ namespace Calendar4e.Data
 
                var students = new List<Student>
                 {
-                    new Student{Username="username",Password = "password",EnrollmentDate=DateTime.Parse("2020-01-01 01:50 PM").ToString("yyyy-MM-ddThh:mm tt"), ThemeColor = "rgb(222, 71, 29)", IsActive=true}
+                    new Student{Username="username",Password = Hashing.HashPassword("password"),EnrollmentDate=DateTime.Parse("2020-01-01 01:50 PM").ToString("yyyy-MM-ddThh:mm tt"), ThemeColor = "rgb(222, 71, 29)", IsActive=true}
                 };
 
                 students.ForEach(s => context.Students.Add(s));

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Calendar</title>
 
-
+    
     <!-- CSS Includes -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.css">
@@ -51,16 +51,22 @@
                     <span class="event-start">date</span>
                 </div>
                 <div class="modal-footer">
-                    <p class="text-warning">Are you sure you want to delete it? <a class="event-del" href="/Task/Delete/0">Yes</a>   or      <a data-dismiss="modal">No</a> </p>
+                    <p class="text-warning">Are you sure you want to delete this? <a class="event-del" href="/Task/Delete/0">Yes</a>   or      <a href="/Task/Index">No</a> </p>
                     <br />
-                    <a class="btn btn-danger event-del" onclick="">Delete</a>
+                    <a class="btn btn-danger" onclick="deleteQuestion()">Delete</a>
+                    <a class="btn btn-warning event-edit" href="/Task/Edit/0">Edit</a>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
 
             </div>
         </div>
     </div>
-
+    <script>
+        function deleteQuestion() {
+            const message = document.querySelector('.text-warning');
+            message.style.visibility='visible';
+        }
+    </script>
 
 
     <!-- bottom navbar-->
@@ -112,6 +118,7 @@
                     jQuery('#modal-view-event').modal();
                     jQuery('.event-id').html(event.TaskID);
                     jQuery('.event-del').attr("href", "/Task/Delete/" + event.TaskID);
+                    jQuery('.event-edit').attr("href", "/Task/Edit/" + event.TaskID);
                     jQuery('.event-start').html(event.start);
                 }
             });

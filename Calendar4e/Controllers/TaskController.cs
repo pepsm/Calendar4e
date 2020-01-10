@@ -24,10 +24,11 @@ namespace Calendar4e.Controllers
 
         }
 
-            public JsonResult GetTasks()
+        public JsonResult GetTasks()
         {
             db.Configuration.ProxyCreationEnabled = false;
-                var tasks = db.Tasks.ToArray();
+                
+            var tasks = db.Tasks.ToArray();
         
             return Json(tasks, JsonRequestBehavior.AllowGet);
             
@@ -115,18 +116,9 @@ namespace Calendar4e.Controllers
             {
                 return HttpNotFound();
             }
-            return View(@task);
-        }
-
-        // POST: Tasks/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            Task @task = db.Tasks.Find(id);
             db.Tasks.Remove(@task);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Task");
         }
 
         protected override void Dispose(bool disposing)
