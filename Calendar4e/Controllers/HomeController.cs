@@ -11,7 +11,11 @@ namespace Calendar4e.Controllers
     public class HomeController : Controller
     {
         private TaskContext db = new TaskContext();
+<<<<<<< HEAD
         public ActionResult Index()
+=======
+        public ActionResult Login()
+>>>>>>> upstream/version-1.2
         {
             return View();
         }
@@ -19,34 +23,89 @@ namespace Calendar4e.Controllers
         // POST: Home/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "name")] Student @student)
+        public ActionResult Login([Bind(Include = "Username,Password")] Student @student)
         {
             if (ModelState.IsValid)
             {
-                @student.themeColor = "red";
-                @student.enrollmentDate = DateTime.Now.ToString("yyyy-MM-dd");
-
-                if (Exists(@student))
+                
+                using (TaskContext db = new TaskContext())
                 {
-                    @ViewBag.Error = "Pick a different name";
-                    return View("Index");
+                    var obj = db.Students.Where(s => s.Username.Equals(@student.Username)).FirstOrDefault();
+
+                    
+                    if (obj != null)
+                    {
+                        if (Hashing.ValidatePassword(student.Password, obj.Password) == true)
+                        {
+                            Session["UserID"] = obj.StudentID.ToString();
+                            Session["Username"] = obj.Username.ToString();
+                            Session["Student"] = obj;
+                            return RedirectToAction("Index", "Task");
+                        }
+                    }
                 }
+            }
+
+            @ViewBag.Error = "Invalid username or password!";
+            return View("Login");
+        }
+        public ActionResult Register()
+        {
+                return View();
+        }
+
+        // POST: Home/Register
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include = "Username,Password")] Student @student)
+        {
+            if (ModelState.IsValid)
+            {
+                using (TaskContext db = new TaskContext())
+                {
+                    if (this.GetStudentByName(student.Username) == null) 
+                    {
+                        Student s = new Student
+                        {
+                            Username = student.Username,
+                            Password = Hashing.HashPassword(student.Password),
+                            EnrollmentDate = DateTime.Now.ToString("yyyy-MM-ddThh:mm tt"),
+                            ThemeColor = "purple",
+                            IsActive = true
+                        };
+
+
+                        db.Students.Add(s);
+                        db.SaveChanges();
+                        return View("Login");
+                    }
+                    else
+                    {
+                        @ViewBag.Error = "User in use. Try with another one!";
+                        return View("Register");
+                    }
+                    
+                }
+<<<<<<< HEAD
                 db.Students.Add(@student);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Tasks"); 
+=======
+
+>>>>>>> upstream/version-1.2
             }
-            return View("Index");
+            return View();
         }
 
 
-        private bool Exists(Student student)
+        private Student GetStudentByName(string name)
         {
-            List<Student> list = db.Students.ToList();
-            foreach (var s in list)
+            foreach (var s in db.Students.ToList())
             {
-                if (s.name == student.name) return true;
+                if (s.Username == name) return s;
             }
-            return false;
+            return null;
         }
+
     }
 }

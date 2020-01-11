@@ -12,10 +12,12 @@ namespace Calendar4e.Data
     {
         public TaskContext() : base("TaskContext")
         {
+            
 
         }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Complaint> Complaints { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

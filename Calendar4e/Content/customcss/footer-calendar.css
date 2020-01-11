@@ -1,5 +1,4 @@
-﻿
-.container-fluid #calendar{
+﻿.container-fluid #calendar{
     margin-top: 5%;
     margin-left: 10%;
     margin-right: 10%;
@@ -13,9 +12,10 @@
 .navbar .container-fluid{
     margin-right: 40px;
     padding-top: 10px;
-    padding-bottom: 10px;   
+    padding-bottom: 10px;
 }
-.nav button{
-    width: 400px;
-    font-size: 20px;
+
+.nav button {
+    width: 300px;
+    margin-right: 20px;
 }
