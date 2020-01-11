@@ -1,35 +1,43 @@
 ﻿using System;
-using System.Linq;
-using System.Web;
+using System.Text;
 using Calendar4e.Models;
 using System.Collections.Generic;
+using System.Linq;
+
+using Calendar4e.Controllers;
 
 namespace Calendar4e.Data
 {
-        public class TaskInitializer : System.Data.Entity.DropCreateDatabaseAlways<TaskContext>
+        public class TaskInitializer : System.Data.Entity.CreateDatabaseIfNotExists<TaskContext>
         {
-            protected override void Seed(TaskContext context)
+            protected override void Seed(TaskContext context)   
             {
-                var students = new List<Student>
-            {
-                new Student{name="Alonso",enrollmentDate=DateTime.Parse("2002-09-01").ToString(), themeColor = "red", isActive=true},
-                new Student{name="Gosho",enrollmentDate=DateTime.Parse("2003-09-01").ToString(), themeColor = "blue", isActive=true},
-                new Student{name="Tosho",enrollmentDate=DateTime.Parse("2002-09-01").ToString(), themeColor = "green", isActive=true}
-            };
+
+               var students = new List<Student>
+                {
+                    new Student{Username="username",Password = Hashing.HashPassword("password"),EnrollmentDate=DateTime.Parse("2020-01-01 01:50 PM").ToString("yyyy-MM-ddThh:mm tt"), ThemeColor = "rgb(222, 71, 29)", IsActive=true}
+                };
+
                 students.ForEach(s => context.Students.Add(s));
                 context.SaveChanges();
 
-                var events = new List<Task>
-            {
-                new Task{subject="subject1", StudentId = 1, description="description", start=DateTime.Parse("2019-12-09 05:50 PM").ToString("yyyy-MM-ddTHH:mm"), end=DateTime.Parse("2019-12-09 06:50 PM").ToString("yyyy-MM-ddTHH:mm")},
-                new Task{subject="subject2", StudentId = 1, description="description", start=DateTime.Parse("2019-12-08 01:50 PM").ToString("yyyy-MM-ddTHH:mm"), end=DateTime.Parse("2019-12-09 02:50 PM").ToString("yyyy-MM-ddTHH:mm")},
-                new Task{subject="subject3", StudentId = 1,description="description", start=DateTime.Parse("2019-12-07 02:50 PM").ToString("yyyy-MM-ddTHH:mm"), end=DateTime.Parse("2019-12-09 03:50 PM").ToString("yyyy-MM-ddTHH:mm")},
+                var tasks = new List<Task>
+                {
+                    new Task{subject="subject1",Student = students.Single(s => s.Username == "username"), description="description", start=DateTime.Parse("2020-01-07 12:00").ToString("yyyy-MM-ddThh:mm"), end=DateTime.Parse("2020-01-08 13:00").ToString("yyyy-MM-ddThh:mm"), allDay = true},
+                    new Task{subject="subject2",Student = students.Single(s => s.Username == "username"), description="description", start=DateTime.Parse("2020-01-09").ToString("yyyy-MM-dd"), end=DateTime.Parse("2020-01-10").ToString("yyyy-MM-dd"), allDay = true},
+                    new Task{subject="subject3",Student = students.Single(s => s.Username == "username"),description="description", start=DateTime.Parse("2020-01-11").ToString("yyyy-MM-dd"), end=DateTime.Parse("2020-01-12").ToString("yyyy-MM-dd"), allDay = true},
+                };
 
-            };
-                events.ForEach(t => context.Tasks.Add(t));
+                tasks.ForEach(t => context.Tasks.Add(t));
                 context.SaveChanges();
 
+                var complaints = new List<Complaint>
+                {
+                    new Complaint { Title = "complaint1", Description = "description1", Date = DateTime.Parse("2020-01-08 05:50 PM").ToString("yyyy-MM-ddTHH:mm"), Email = "example@gmail.com" }
+                };
+                complaints.ForEach(c => context.Complaints.Add(c));
+                context.SaveChanges();
+            
             }
         }
-
 }

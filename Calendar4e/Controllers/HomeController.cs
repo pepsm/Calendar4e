@@ -11,11 +11,7 @@ namespace Calendar4e.Controllers
     public class HomeController : Controller
     {
         private TaskContext db = new TaskContext();
-<<<<<<< HEAD
-        public ActionResult Index()
-=======
         public ActionResult Login()
->>>>>>> upstream/version-1.2
         {
             return View();
         }
@@ -86,13 +82,7 @@ namespace Calendar4e.Controllers
                     }
                     
                 }
-<<<<<<< HEAD
-                db.Students.Add(@student);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Tasks"); 
-=======
 
->>>>>>> upstream/version-1.2
             }
             return View();
         }

@@ -8,14 +8,6 @@ namespace Calendar4e.Models
     public class Student
     {
         [Key]
-<<<<<<< HEAD
-        public int Id { get; set; }
-        public string name { get; set; }
-        public string themeColor { get; set; }
-        public string enrollmentDate { get; set; }
-        public virtual ICollection<Task> tasks { get; set; }
-        public bool isActive { get; set; }
-=======
         public int StudentID { get; set; }
 
         [DataType(DataType.Text)]
@@ -33,6 +25,5 @@ namespace Calendar4e.Models
         public bool IsActive { get; set; }
 
         public virtual ICollection<Task> Tasks { get; set; }
->>>>>>> upstream/version-1.2
     }
 }

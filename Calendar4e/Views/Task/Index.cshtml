@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-﻿@{
-    Layout = null;
-}
-@model Calendar4e.Models.Task
-
-=======
 ﻿@model Calendar4e.Models.Task
 @{
     Layout = null;
 }
->>>>>>> upstream/version-1.2
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,21 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Calendar</title>
 
-<<<<<<< HEAD
-
-    <!-- CSS Includes -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
-    <script src="https://kit.fontawesome.com/03cf08f72f.js" crossorigin="anonymous"></script>
-    <!-- CSS Custom -->
-    <link rel="stylesheet" href="~/Content/customcss/footer-calendar.css" />
-    <link rel="stylesheet" href="~/Content/customcss/custom-calendar.css" />
-</head>
-
-
-<body>
-
-=======
     
     <!-- CSS Includes -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -59,18 +36,10 @@
         </div>
     }
 
->>>>>>> upstream/version-1.2
     <div class="container-fluid">
         <div id='calendar'></div>
     </div>
 
-<<<<<<< HEAD
-
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container-fluid">
-            <div class="nav navbar-nav navbar-right">
-                <button type="button" class="btn btn-danger" aria-pressed="false" data-toggle="modal" data-target=".bd-example-modal-lg" autocomplete="off">Create Event    </button>
-=======
     <!-- calendar modal -->
     <div id="modal-view-event" class="modal modal-top fade calendar-modal">
         <div class="modal-dialog modal-dialog-centered">
@@ -108,7 +77,6 @@
             </div>
             <div class="nav navbar-nav navbar-right">
                 <button type="button" class="btn btn-danger" aria-pressed="false" data-toggle="modal" data-target=".bd-complaint-modal-lg" autocomplete="off">Complaint</button>
->>>>>>> upstream/version-1.2
             </div>
         </div>
     </nav>
@@ -133,24 +101,6 @@
                     right: 'month,agendaWeek,agendaDay'
                 },
                 allDayDefault: false,
-<<<<<<< HEAD
-                firstDay: 1,
-                slotMinutes: 15,
-                events: '@Url.RouteUrl(new{ action="GetTasks", controller="Task"})',
-                eventRender: function (event, element) {
-                    element.find('.fc-content').append("<br/>" + event.description);
-                    element.find('.fc-title').append("<br/>" + event.subject);
-                }
-            });
-        });
-
-
-    </script>
-
-
-
-    <!-- Bootstrap modal -->
-=======
                 timeZone: 'local',
                 defaultDate: '2020-01-07',
                 firstDay: 1,
@@ -176,81 +126,11 @@
     </script>
 
     <!-- Create Task Model -->
->>>>>>> upstream/version-1.2
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="container-fluid">
 
-<<<<<<< HEAD
-                        <h2>Create</h2>
-
-
-                        @using (Html.BeginForm("Create", "Task", 
-            new { ReturnUrl = ViewBag.ReturnUrl }, 
-            FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="form-horizontal">
-                                <h4>Task</h4>
-                                <hr />
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.subject, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.subject, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.subject, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.start, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.start, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.start, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.end, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.end, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.end, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.allDay, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.allDay)
-                                            @Html.ValidationMessageFor(model => model.allDay, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Create" class="btn btn-default" />
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
-                        <div>
-                            @Html.ActionLink("Back to List", "Index")
-                        </div>
-                    </div>
-=======
                     <h2>Create</h2>
 
 
@@ -395,20 +275,9 @@
                     </div>
                     <br />
                 </div>
->>>>>>> upstream/version-1.2
 
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-
 </body>
 </html>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-=======
-</body>
-</html>
->>>>>>> upstream/version-1.2
