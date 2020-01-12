@@ -12,11 +12,13 @@
 .dl-horizontal dt {
     white-space: normal;
 }
-.custom-page-header, label{
+
+.custom-page-header, label {
     color: rgb(158, 157, 157);
     font-family: 'Montserrat', sans-serif;
 }
-.edit{
+
+.edit {
     color: rgb(28, 28, 28);
 }
 /* Set width on the form input elements since they're 100% wide by default */
@@ -26,9 +28,10 @@ textarea {
     max-width: 280px;
 }
 
-.mid-col{
+.mid-col {
     margin-top: 5%;
 }
+
 .index-form {
     padding: 50px;
     transition: all 0.3s;
@@ -38,15 +41,16 @@ textarea {
 }
 
 
-.index-form:hover {
-    box-shadow: 0px 0px 10px 2px rgba(158, 157, 157, 0.3);
-    border: 1px dashed rgba(158, 157, 157, 0.0);
-}
+    .index-form:hover {
+        box-shadow: 0px 0px 10px 2px rgba(158, 157, 157, 0.3);
+        border: 1px dashed rgba(158, 157, 157, 0.0);
+    }
 
-.uppercase{
+.uppercase {
     text-transform: uppercase;
     color: gray;
 }
-#error{
+
+#error {
     color: red;
 }
