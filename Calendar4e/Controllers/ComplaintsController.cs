@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -18,36 +19,17 @@ namespace Calendar4e.Controllers
             return View(db.Complaints.ToList());
         }
 
-        // GET: Complaints/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Complaint complaint = db.Complaints.Find(id);
-            if (complaint == null)
-            {
-                return HttpNotFound();
-            }
-            return View(complaint);
-        }
-
-        // GET: Complaints/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: Complaints/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,title,description,date,email")] Complaint complaint)
+        public ActionResult Create([Bind(Include = "Description,Email,DirectedToUser")] Complaint @complaint)
         {
             if (ModelState.IsValid)
             {
+                complaint.Date = DateTime.Now.ToString();
                 db.Complaints.Add(complaint);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -56,38 +38,10 @@ namespace Calendar4e.Controllers
             return View(complaint);
         }
 
-        // GET: Complaints/Edit/5
-        public ActionResult Edit(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Complaint complaint = db.Complaints.Find(id);
-            if (complaint == null)
-            {
-                return HttpNotFound();
-            }
-            return View(complaint);
-        }
 
-        // POST: Complaints/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,title,description,date,email")] Complaint complaint)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(complaint).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(complaint);
-        }
+        // No delete, for now.
 
-        // GET: Complaints/Delete/5
+        /*// GET: Complaints/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
@@ -111,7 +65,7 @@ namespace Calendar4e.Controllers
             db.Complaints.Remove(complaint);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {
