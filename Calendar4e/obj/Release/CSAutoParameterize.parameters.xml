@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="TaskContext-Web.config Connection String" description="TaskContext Connection String used in web.config by the application to access the database." defaultValue="Server=localhost\MSSQLSERVER01;Database=master;Trusted_Connection=True;Database=MyDB;User Id=sa;Password=qwerty123;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\mihai\\OneDrive\\Documents\\GitHub\\software-project\\Calendar4e\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TaskContext']/@connectionString" />
-  </parameter>
-</parameters>

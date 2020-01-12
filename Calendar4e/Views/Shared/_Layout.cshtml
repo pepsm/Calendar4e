@@ -7,14 +7,30 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-     <link rel="stylesheet"  href="~/Content/Site.css" />
-        @Scripts.Render("~/bundles/modernizr")
+    <!-- Google fonts included from cdn -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/Content/customcss/custom-layout-nav.css" />
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <nav>
+
+        <div class="logo">
+            <h4>Calendar4e</h4>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+        </ul>
+    </nav>
+
     <div class="container-fluid">
         @RenderBody()
     </div>
-    
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

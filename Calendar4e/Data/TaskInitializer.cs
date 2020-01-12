@@ -15,7 +15,7 @@ namespace Calendar4e.Data
 
                var students = new List<Student>
                 {
-                    new Student{Username="username",Password = "password",EnrollmentDate=DateTime.Parse("2020-01-01 01:50 PM").ToString("yyyy-MM-ddThh:mm tt"), ThemeColor = "rgb(222, 71, 29)", IsActive=true}
+                    new Student{Username="username",Password = Hashing.HashPassword("password"),EnrollmentDate=DateTime.Parse("2020-01-01 01:50 PM").ToString("yyyy-MM-ddThh:mm tt"), ThemeColor = "rgb(222, 71, 29)", IsActive=true}
                 };
 
                 students.ForEach(s => context.Students.Add(s));
@@ -23,9 +23,9 @@ namespace Calendar4e.Data
 
                 var tasks = new List<Task>
                 {
-                    new Task{subject="subject1",Student = students.Single(s => s.Username == "username"), description="description", start=DateTime.Parse("2020-01-07 12:00").ToString("yyyy-MM-ddThh:mm"), end=DateTime.Parse("2020-01-08 13:00").ToString("yyyy-MM-ddThh:mm"), allDay = true},
-                    new Task{subject="subject2",Student = students.Single(s => s.Username == "username"), description="description", start=DateTime.Parse("2020-01-09").ToString("yyyy-MM-dd"), end=DateTime.Parse("2020-01-10").ToString("yyyy-MM-dd"), allDay = true},
-                    new Task{subject="subject3",Student = students.Single(s => s.Username == "username"),description="description", start=DateTime.Parse("2020-01-11").ToString("yyyy-MM-dd"), end=DateTime.Parse("2020-01-12").ToString("yyyy-MM-dd"), allDay = true},
+                    new Task{subject="Clean the room",Student = students.Single(s => s.Username == "username"), description="Koko should clean his room!", start=DateTime.Parse("2020-01-07 12:00").ToString("yyyy-MM-ddThh:mm"), end=DateTime.Parse("2020-01-08 13:00").ToString("yyyy-MM-ddThh:mm"), allDay = true},
+                    new Task{subject="Cook",Student = students.Single(s => s.Username == "username"), description="Gosho will cook tonight", start=DateTime.Parse("2020-01-09").ToString("yyyy-MM-dd"), end=DateTime.Parse("2020-01-10").ToString("yyyy-MM-dd"), allDay = true},
+                    new Task{subject="Wash the dishes",Student = students.Single(s => s.Username == "username"),description="description", start=DateTime.Parse("2020-01-22").ToString("yyyy-MM-dd"), end=DateTime.Parse("2020-01-23").ToString("yyyy-MM-dd"), allDay = true},
                 };
 
                 tasks.ForEach(t => context.Tasks.Add(t));

@@ -5,10 +5,10 @@
             
         </div>
 
-        <div class="col">
+        <div class="col mid-col">
 
             <div class="container-fluid">
-                <h4>Login</h4>
+                <h4 class="custom-page-header">Login</h4>
             </div>
             <br />
 
@@ -30,7 +30,9 @@
                     <label for="Password">Password</label>
                     @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                     <small id="error">@ViewBag.Error</small>
-                    <small id="help" class="form-text text-muted">You can login with: username and password as credentials. Dev only!!</small>
+                    <div class="container-fluid">
+                        <small id="help" class="form-text text-muted">You can login with: username and password as credentials!</small>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-danger btn-block">Login</button>
                 <br />
