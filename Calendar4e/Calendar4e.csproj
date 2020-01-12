@@ -216,6 +216,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\calendar4e - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\calendar4e - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\calendar4e - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Calendar4e.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\customcalendar-js\calendar-index.js" />
