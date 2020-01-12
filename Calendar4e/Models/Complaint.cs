@@ -9,11 +9,14 @@ namespace Calendar4e.Models
     public class Complaint
     {
         [Key]
-        public Int64 ID { get; set; }
+        public int ID { get; set; }
+        public String DirectedToUser { get; set; }
         public String Title { get; set; }
         public String Description { get; set; }
+
+        [DataType(DataType.Date)]
         public String Date { get; set; }
-        public String Email { get; set; }
+        public virtual Student Student { get; set; }
 
     }
 }

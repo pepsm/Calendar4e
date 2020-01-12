@@ -14,8 +14,10 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
 .nav button {
     width: 300px;
     margin-right: 20px;
+}
+.modal-footer{
+    margin-top: 0px;
 }

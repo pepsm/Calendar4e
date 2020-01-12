@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -10,81 +11,12 @@ namespace Calendar4e.Controllers
 {
     public class ComplaintsController : Controller
     {
-        private TaskContext db = new TaskContext();
+        private readonly TaskContext db = new TaskContext();
 
         // GET: Complaints
         public ActionResult Index()
         {
             return View(db.Complaints.ToList());
-        }
-
-        // GET: Complaints/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Complaint complaint = db.Complaints.Find(id);
-            if (complaint == null)
-            {
-                return HttpNotFound();
-            }
-            return View(complaint);
-        }
-
-        // GET: Complaints/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Complaints/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,title,description,date,email")] Complaint complaint)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Complaints.Add(complaint);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(complaint);
-        }
-
-        // GET: Complaints/Edit/5
-        public ActionResult Edit(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Complaint complaint = db.Complaints.Find(id);
-            if (complaint == null)
-            {
-                return HttpNotFound();
-            }
-            return View(complaint);
-        }
-
-        // POST: Complaints/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,title,description,date,email")] Complaint complaint)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(complaint).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(complaint);
         }
 
         // GET: Complaints/Delete/5
@@ -94,23 +26,33 @@ namespace Calendar4e.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Complaint complaint = db.Complaints.Find(id);
+            Complaint @complaint = db.Complaints.Find(id);
             if (complaint == null)
             {
                 return HttpNotFound();
             }
-            return View(complaint);
+            db.Complaints.Remove(@complaint);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Task");
         }
 
-        // POST: Complaints/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Complaints/Create
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public ActionResult Create([Bind(Include = "Title, Description, DirectedToUser")] Complaint @complaint)
         {
-            Complaint complaint = db.Complaints.Find(id);
-            db.Complaints.Remove(complaint);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                Student student = (Student)Session["Student"];
+                complaint.Date = DateTime.Now.ToString();
+                complaint.Student = student;
+                
+                db.Complaints.Add(complaint);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(complaint);
         }
 
         protected override void Dispose(bool disposing)
