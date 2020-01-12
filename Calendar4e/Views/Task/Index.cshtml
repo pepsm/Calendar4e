@@ -1,4 +1,4 @@
-﻿@model Calendar4e.Models.Task
+﻿﻿@model Calendar4e.Models.ViewModel
 @{
     Layout = null;
 }
@@ -30,11 +30,12 @@
 </head>
 <body>
     <nav class="navbar-fixed-top">
-
         <div class="logo">
-            <h4>Calendar4e</h4>
-        </div>
+            <a href="/">
+                <h4>Calendar4e</h4>
+            </a>
 
+        </div>
         @if (Session["Username"] != null)
         {
             <div>
@@ -44,19 +45,48 @@
                 </h4>
             </div>
         }
-            <ul class="nav-links">
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-            </ul>
-       
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
+        <ul class="nav-links">
+            <li><a href="#">My Tasks</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="/Complaints/Index">All Complaints</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+    <!-- animation script -->
+    <script>
+        const navSlide = () => {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li');
+
+            // Toggle Nav
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+
+                //Animate Links
+                navLinks.forEach((link, index) => {
+                    console.log(index);
+                    if (link.style.animation) {
+                        link.style.animation = '';
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 1}s`;
+                    }
+                });
+
+                //Burger Animation
+                burger.classList.toggle('toggle');
+            });
+
+
+        }
+        navSlide();
+    </script>
+
 
     <div class="container-fluid">
         <div id='calendar'></div>
@@ -166,8 +196,8 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2 text-uppercase">Subject</label>
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.subject, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.subject, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Task.subject, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Task.subject, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -175,33 +205,34 @@
 
                                 <label class="control-label col-md-2 text-uppercase">Description</label>
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                                    @Html.TextAreaFor(model => model.Task.description, new { @class = "form-control", @rows = 5 })
+                                    @Html.ValidationMessageFor(model => model.Task.description, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.start, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
+                                @Html.LabelFor(model => model.Task.start, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.start, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.start, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Task.start, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Task.start, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.end, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
+                                @Html.LabelFor(model => model.Task.end, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.end, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.end, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Task.end, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Task.end, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.allDay, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.Task.allDay, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     <div class="checkbox">
-                                        @Html.EditorFor(model => model.allDay)
-                                        @Html.ValidationMessageFor(model => model.allDay, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.Task.allDay)
+                                        @Html.ValidationMessageFor(model => model.Task.allDay, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -225,72 +256,55 @@
     </div>
 
     <!-- Create Complaint Model -->
-    <div class="modal fade bd-complaint-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeComplaintModalLabel" aria-hidden="true">
+    <div class="modal fade bd-complaint-modal-lg" tabindex="-2" role="dialog" aria-labelledby="myLargeComplaintModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="container-fluid">
 
                     <h2>Complaint</h2>
 
-
-                    @using (Html.BeginForm("Create", "Task", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                    @using (Html.BeginForm("Create", "Complaints", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
 
                         <div class="form-horizontal">
-                            <h4>Task</h4>
+                            <h4>Complaint</h4>
                             <hr />
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                             <div class="form-group">
-                                <label class="control-label col-md-2 text-uppercase">Subject</label>
+                                @Html.LabelFor(model => model.Complaint.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.subject, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.subject, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Complaint.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Complaint.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Complaint.DirectedToUser, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.Complaint.DirectedToUser, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Complaint.DirectedToUser, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-
-                                <label class="control-label col-md-2 text-uppercase">Description</label>
+                                @Html.LabelFor(model => model.Complaint.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.start, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.start, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.start, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.end, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.end, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.end, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.allDay, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    <div class="checkbox">
-                                        @Html.EditorFor(model => model.allDay)
-                                        @Html.ValidationMessageFor(model => model.allDay, "", new { @class = "text-danger" })
-                                    </div>
+                                    @Html.TextAreaFor(model => model.Complaint.Description, new { @class = "form-control", @rows = 5 })
+                                    @Html.ValidationMessageFor(model => model.Complaint.Description, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
                                     <input type="submit" value="Create" class="btn btn-default" />
+
                                 </div>
                             </div>
+
                         </div>
                     }
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>

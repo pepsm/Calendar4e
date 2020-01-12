@@ -195,6 +195,7 @@
     <Compile Include="Models\Complaint.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -321,10 +322,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Task\Edit.cshtml" />
     <Content Include="Views\Task\Index.cshtml" />
-    <Content Include="Views\Complaints\Create.cshtml" />
     <Content Include="Views\Complaints\Delete.cshtml" />
     <Content Include="Views\Complaints\Details.cshtml" />
-    <Content Include="Views\Complaints\Edit.cshtml" />
     <Content Include="Views\Complaints\Index.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
   </ItemGroup>

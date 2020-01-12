@@ -9,7 +9,7 @@ namespace Calendar4e.Controllers
 {
     public class TaskController : Controller
     {
-        private TaskContext db = new TaskContext();
+        private readonly TaskContext db = new TaskContext();
 
         // GET: Task
         public ActionResult Index()
@@ -59,7 +59,7 @@ namespace Calendar4e.Controllers
         // POST: Task/Create 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TaskID,subject,description,start,end,allDay")] Task @task)
+        public ActionResult Create([Bind(Include = "subject,description,start,end,allDay")] Task @task)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,6 @@ namespace Calendar4e.Controllers
 
             return View(@task);
         }
-
 
         // GET: Tasks/Edit/5
         public ActionResult Edit(long? id)
@@ -89,8 +88,7 @@ namespace Calendar4e.Controllers
             }
             return View(@task);
         }
-
-        
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "TaskID,Subject,Description,Start,End,AllDay")] Task @task)
