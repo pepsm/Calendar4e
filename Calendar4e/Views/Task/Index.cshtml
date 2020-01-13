@@ -16,15 +16,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
     <script src="https://kit.fontawesome.com/03cf08f72f.js" crossorigin="anonymous"></script>
-    
+
     <!-- JS includes -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
+
+    <!-- JS piklor -->
+    <script src="~/Scripts/piklor/piklor.js"></script>
+    <script src="~/Scripts/piklor/"></script>
 
     <!-- Google fonts included from cdn -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
@@ -85,7 +90,7 @@
                     <h4 class="modal-title"><span class="event-subject"></span></h4>
                     <div class="event-body"></div>
                     <span class="event-start">date</span>
-                    <p class="text-warning">Are you sure you want to delete this? <a class="event-del" href="/Task/Delete/0">Yes</a>   or      <a href="/Task/Index">No</a> </p>
+                    <p class="text-warning">Are you sure you want to delete this? <a class="event-del" href="/Task/Delete/0">Yes</a> or <a href="">No</a> </p>
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-danger" onclick="deleteQuestion()">Delete</a>
@@ -103,11 +108,11 @@
     <!-- JS for the calendar -->
     <script>      
          $(document).ready(function () {
-            $('#calendar').fullCalendar({
+             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    right: 'month,agendaWeek,agendaDay,list'
                 },
                 allDayDefault: false,
                 timeZone: 'local',
@@ -161,60 +166,72 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <div class="form-horizontal">
-                            <h4>Task</h4>
-                            <hr />
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group">
-                                <label class="control-label col-md-2 text-uppercase">Subject</label>
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Task.subject, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Task.subject, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                <div class="form-horizontal">
+                    <h4>Task</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-label col-md-2 text-uppercase">Subject</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Task.subject, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Task.subject, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-                            <div class="form-group">
+                    <div class="form-group">
 
-                                <label class="control-label col-md-2 text-uppercase">Description</label>
-                                <div class="col-md-10">
-                                    @Html.TextAreaFor(model => model.Task.description, new { @class = "form-control", @rows = 5 })
-                                    @Html.ValidationMessageFor(model => model.Task.description, "", new { @class = "text-danger" })
+                        <label class="control-label col-md-2 text-uppercase">Description</label>
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Task.description, new { @class = "form-control", @rows = 5 })
+                            @Html.ValidationMessageFor(model => model.Task.description, "", new { @class = "text-danger" })
 
-                                </div>
-                            </div>
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Task.start, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Task.start, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Task.start, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Task.start, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Task.start, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Task.start, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Task.end, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Task.end, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Task.end, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Task.end, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Task.end, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Task.end, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Task.allDay, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    <div class="checkbox">
-                                        @Html.EditorFor(model => model.Task.allDay)
-                                        @Html.ValidationMessageFor(model => model.Task.allDay, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Create" class="btn btn-default" />
-                                </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Task.allDay, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.Task.allDay)
+                                @Html.ValidationMessageFor(model => model.Task.allDay, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Task.color, htmlAttributes: new { @class = "control-label col-md-2" })
+                      
+                        <div class="col-md-10 picker-wrapper">
+                            <button class="btn btn-default">Select color</button>
+                            <div class="color-picker">
+                            </div>
+                        </div>
+            
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
                     }
 
                     <div>

@@ -107,7 +107,6 @@ C:\Users\mihai\OneDrive\Documents\GitHub\software-project\Calendar4e\bin\Antlr3.
 C:\Users\mihai\OneDrive\Documents\GitHub\software-project\Calendar4e\bin\WebMatrix.Data.xml
 C:\Users\mihai\OneDrive\Documents\GitHub\software-project\Calendar4e\bin\WebMatrix.WebData.xml
 C:\Users\mihai\OneDrive\Documents\GitHub\software-project\Calendar4e\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\mihai\OneDrive\Documents\GitHub\software-project\Calendar4e\obj\Debug\Calendar4e.csprojAssemblyReference.cache
 C:\Users\mihai\OneDrive\Documents\GitHub\software-project\Calendar4e\obj\Debug\Calendar4e.csproj.CopyComplete
 C:\Users\mihai\OneDrive\Documents\GitHub\software-project\Calendar4e\obj\Debug\Calendar4e.dll
 C:\Users\mihai\OneDrive\Documents\GitHub\software-project\Calendar4e\obj\Debug\Calendar4e.pdb
@@ -224,3 +223,4 @@ D:\software-project\Calendar4e\bin\WebMatrix.WebData.xml
 D:\software-project\Calendar4e\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\software-project\Calendar4e\obj\Debug\Calendar4e.csprojResolveAssemblyReference.cache
 D:\software-project\Calendar4e\obj\Debug\Calendar4e.csproj.CoreCompileInputs.cache
+C:\Users\mihai\OneDrive\Documents\GitHub\software-project\Calendar4e\obj\Debug\Calendar4e.csprojAssemblyReference.cache

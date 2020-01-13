@@ -225,7 +225,6 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\customcalendar-js\calendar-modal.js" />
     <Content Include="Scripts\customcalendar-js\calendar-navigation.js" />
-    <Content Include="Scripts\customcalendar-js\calendar-index.js" />
     <Content Include="Scripts\fullcalendar\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar\fullcalendar.min.js" />
     <Content Include="Scripts\fullcalendar\gcal.js" />
@@ -316,6 +315,8 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\piklor\funct-piklor.js" />
+    <Content Include="Scripts\piklor\piklor.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
