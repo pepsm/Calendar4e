@@ -16,6 +16,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
     <script src="https://kit.fontawesome.com/03cf08f72f.js" crossorigin="anonymous"></script>
+    
+    <!-- JS includes -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
+
     <!-- Google fonts included from cdn -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     @section Styles {
@@ -29,6 +39,7 @@
 
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar-fixed-top">
         <div class="logo">
             <a href="/">
@@ -57,42 +68,15 @@
             <div class="line3"></div>
         </div>
     </nav>
-    <!-- animation script -->
-    <script>
-        const navSlide = () => {
-            const burger = document.querySelector('.burger');
-            const nav = document.querySelector('.nav-links');
-            const navLinks = document.querySelectorAll('.nav-links li');
 
-            // Toggle Nav
-            burger.addEventListener('click', () => {
-                nav.classList.toggle('nav-active');
-
-                //Animate Links
-                navLinks.forEach((link, index) => {
-                    console.log(index);
-                    if (link.style.animation) {
-                        link.style.animation = '';
-                    } else {
-                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 1}s`;
-                    }
-                });
-
-                //Burger Animation
-                burger.classList.toggle('toggle');
-            });
-
-
-        }
-        navSlide();
-    </script>
-
+    <!-- Animation script for the navigation -->
+    <script src="~/Scripts/customcalendar-js/calendar-navigation.js"></script>
 
     <div class="container-fluid">
         <div id='calendar'></div>
     </div>
 
-    <!-- calendar modal -->
+    <!-- Calendar modal -->
     <div id="modal-view-event" class="modal modal-top fade calendar-modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -112,39 +96,13 @@
             </div>
         </div>
     </div>
-    <script>
-        function deleteQuestion() {
-            const message = document.querySelector('.text-warning');
-            message.style.visibility = 'visible';
-        }
-    </script>
 
-
-    <!-- bottom navbar-->
-    <nav class="navbar navbar-fixed-bottom">
-        <div class="container-fluid">
-            <div class="nav navbar-nav navbar-right">
-                <button type="button" class="btn btn-danger" aria-pressed="false" data-toggle="modal" data-target=".bd-example-modal-lg" autocomplete="off">Create Task</button>
-            </div>
-            <div class="nav navbar-nav navbar-right">
-                <button type="button" class="btn btn-danger" aria-pressed="false" data-toggle="modal" data-target=".bd-complaint-modal-lg" autocomplete="off">Complaint</button>
-            </div>
-        </div>
-    </nav>
-
-
-    <!-- JS includes -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
-    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
+    <!-- JS for calendar modal -->
+    <script src="~/Scripts/customcalendar-js/calendar-modal.js"></script>
 
     <!-- JS for the calendar -->
-    <script>
-        $(document).ready(function () {
+    <script>      
+         $(document).ready(function () {
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
@@ -162,10 +120,10 @@
                 eventRender: function (event, element) {
                     element.find('.fc-title').append(" " + event.subject);
                 },
-                timeFormat: 'h:mm',
+                timeFormat: 'hh:mm',
                 eventClick: function (event, jsEvent, view) {
-					jQuery('.event-subject').html(event.subject);
-					jQuery('.event-body').html(event.description);
+                    jQuery('.event-subject').html(event.subject);
+                    jQuery('.event-body').html(event.description);
                     jQuery('#modal-view-event').modal();
                     jQuery('.event-id').html(event.TaskID);
                     jQuery('.event-del').attr("href", "/Task/Delete/" + event.TaskID);
@@ -175,6 +133,20 @@
             });
         });
     </script>
+
+    <!-- Bottom menu-->
+    <nav class="navbar navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="nav navbar-nav navbar-right">
+                <button type="button" class="btn btn-danger" aria-pressed="false" data-toggle="modal" data-target=".bd-example-modal-lg" autocomplete="off">Create Task</button>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <button type="button" class="btn btn-danger" aria-pressed="false" data-toggle="modal" data-target=".bd-complaint-modal-lg" autocomplete="off">Complaint</button>
+            </div>
+        </div>
+    </nav>
+
+
 
     <!-- Create Task Model -->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -305,10 +277,11 @@
                         </div>
                     }
 
+                    <!-- Footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
-                    <br />
+
                 </div>
 
             </div>

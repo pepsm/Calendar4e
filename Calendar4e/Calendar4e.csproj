@@ -221,6 +221,8 @@
     <None Include="Properties\PublishProfiles\calendar4e - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Calendar4e.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\customcalendar-js\calendar-modal.js" />
+    <Content Include="Scripts\customcalendar-js\calendar-navigation.js" />
     <Content Include="Scripts\customcalendar-js\calendar-index.js" />
     <Content Include="Scripts\fullcalendar\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar\fullcalendar.min.js" />
