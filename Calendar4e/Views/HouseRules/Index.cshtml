@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Calendar4e.Models.Rule>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of House Rules</h2>
+<p>
+    <a href="/Task/Index">Go Back</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <!-- Edit/Delete/Create buttons will only be visible to admin -->
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+</table>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

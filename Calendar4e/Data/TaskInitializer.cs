@@ -39,6 +39,15 @@ namespace Calendar4e.Data
             complaints.ForEach(c => context.Complaints.Add(c));
             context.SaveChanges();
 
+            var rules = new List<Rule>
+                {
+                    new Rule { Description = "Do your chores"},
+                    new Rule { Description = "You are not allowed to bring pets"},
+                    new Rule { Description = "Be in bed before 21:00"},
+                    new Rule { Description = "You are not allowed to have fun"},
+                };
+            rules.ForEach(r => context.HouseRules.Add(r));
+            context.SaveChanges();
         }
     }
 }

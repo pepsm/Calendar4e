@@ -184,6 +184,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComplaintsController.cs" />
+    <Compile Include="Controllers\HouseRulesController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\Hashing.cs" />
@@ -193,6 +194,7 @@
     </Compile>
     <Compile Include="Data\TaskInitializer.cs" />
     <Compile Include="Models\Complaint.cs" />
+    <Compile Include="Models\Rule.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\ViewModel.cs" />
@@ -331,6 +333,7 @@
     <Content Include="Views\Complaints\Details.cshtml" />
     <Content Include="Views\Complaints\Index.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\HouseRules\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
