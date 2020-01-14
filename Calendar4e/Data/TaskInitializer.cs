@@ -20,7 +20,7 @@ namespace Calendar4e.Data
             students.ForEach(s => context.Students.Add(s));
             context.SaveChanges();
 
-
+          
             var tasks = new List<Task>
                 {
                     new Task{subject="Clean the room",Student = students.Single(s => s.Username == "username"), description="Koko should clean his room!", start=DateTime.Parse("2020-01-07 12:00").ToString("yyyy-MM-ddThh:mm"), end=DateTime.Parse("2020-01-08 13:00").ToString("yyyy-MM-ddThh:mm"), allDay = true},
@@ -55,6 +55,8 @@ namespace Calendar4e.Data
                 new Role{ RoleName = RoleType.User.ToString()}
             };
             roles.ForEach(r => context.Roles.Add(r));
+            context.SaveChanges();
+
             context.SaveChanges();
 
             var userRoles = new List<UserRoleMappingModel>()

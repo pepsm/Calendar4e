@@ -16,6 +16,12 @@ namespace Calendar4e.Controllers
             return View();
         }
 
+        // GET: Home/Unauthorized
+        public ActionResult Unauthorized()
+        {
+            return View();
+        }
+
         // POST: Home/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
