@@ -18,7 +18,9 @@ namespace Calendar4e.Data
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
-        public DbSet<Rule> HouseRules { get; set; }
+        public DbSet<HouseRule> HouseRules { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRoleMappingModel> UserRoles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

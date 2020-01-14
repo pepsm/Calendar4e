@@ -194,9 +194,12 @@
     </Compile>
     <Compile Include="Data\TaskInitializer.cs" />
     <Compile Include="Models\Complaint.cs" />
-    <Compile Include="Models\Rule.cs" />
+    <Compile Include="Models\Role\RoleType.cs" />
+    <Compile Include="Models\Role\Role.cs" />
+    <Compile Include="Models\HouseRule.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\UserRoleMappingModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -12,7 +12,7 @@ namespace Calendar4e.Controllers
     {
         private readonly TaskContext db = new TaskContext();
 
-        // GET: Complaints
+        // GET: /HouseRules/Index
         public ActionResult Index()
         {
             return View(db.HouseRules.ToList());
