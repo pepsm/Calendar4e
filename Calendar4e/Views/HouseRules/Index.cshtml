@@ -19,18 +19,21 @@
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
 
-                    <!-- Edit/Delete/Create buttons will only be visible to admin -->
+            <!-- Edit/Delete/Create buttons will only be visible to admin -->
+            @if (Session["Role"] == "Admin")
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            }
 
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                    </td>
-                </tr>
+        </tr>
             }
         </table>
         <p>

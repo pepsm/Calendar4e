@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Calendar4e.App_Start;
 using Calendar4e.Data;
 using Calendar4e.Models;
 
@@ -13,7 +12,6 @@ namespace Calendar4e.Controllers
         private readonly TaskContext db = new TaskContext();
 
         // GET: Task
-        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();

@@ -19,9 +19,7 @@ namespace Calendar4e.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<HouseRule> HouseRules { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<UserRoleMappingModel> UserRoles { get; set; }
-
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

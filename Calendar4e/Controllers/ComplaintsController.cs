@@ -39,7 +39,7 @@ namespace Calendar4e.Controllers
         // POST: Complaints/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Title, Description, DirectedToUser")] Complaint @complaint)
+        public ActionResult Create([Bind(Include = "Title, Description, DirectedToUser, IsPublic")] Complaint @complaint)
         {
             if (ModelState.IsValid)
             {
@@ -54,7 +54,6 @@ namespace Calendar4e.Controllers
 
             return View(complaint);
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Calendar4e.Models.Student>
+
+@{
+    ViewBag.Title = "Users";
+}
+<div class="container-fluid">
+    <h2 class="custom-page-header edit">Users</h2>
+
+    <p>
+        <a href="/Admin/Index">Go Back</a>
+    </p>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnrollmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThemeColor)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThemeColor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteUser", new { id = item.StudentID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
