@@ -353,3 +353,6 @@ C:\Users\pepsm\Documents\GitHub\software-project\Calendar4e\obj\Debug\Calendar4e
 C:\Users\pepsm\Documents\GitHub\software-project\Calendar4e\obj\Debug\Calendar4e.csproj.CopyComplete
 C:\Users\pepsm\Documents\GitHub\software-project\Calendar4e\obj\Debug\Calendar4e.dll
 C:\Users\pepsm\Documents\GitHub\software-project\Calendar4e\obj\Debug\Calendar4e.pdb
+C:\Users\pepsm\Documents\GitHub\software-project\Calendar4e\bin\EntityFramework.Extended.dll
+C:\Users\pepsm\Documents\GitHub\software-project\Calendar4e\bin\EntityFramework.Extended.xml
+C:\Users\pepsm\Documents\GitHub\software-project\Calendar4e\bin\EntityFramework.Extended.dll.config

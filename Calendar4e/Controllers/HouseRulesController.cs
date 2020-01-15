@@ -15,7 +15,10 @@ namespace Calendar4e.Controllers
         // GET: /HouseRules/Index
         public ActionResult Index()
         {
-            return View(db.HouseRules.ToList());
+            HouseViewModel houseViewModel = new HouseViewModel();
+            houseViewModel.houseRule =  new HouseRule();
+            houseViewModel.listRules = db.HouseRules.ToList();
+            return View(houseViewModel);
         }
     }
 }

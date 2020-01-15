@@ -31,6 +31,13 @@
     <script src="~/Scripts/piklor/piklor.js"></script>
     <script src="~/Scripts/piklor/"></script>
 
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap/variables.less" />
+    <link rel="stylesheet" href="~/Content/bootstrap-datetimepicker-build.less" />
+
     <!-- Google fonts included from cdn -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     @section Styles {
@@ -191,7 +198,26 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Task.start, htmlAttributes: new { @class = "control-label col-md-2 uppercase" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Task.start, new { htmlAttributes = new { @class = "form-control" } })
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class='col-sm-6'>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datepicker_start' >
+                                                <input type='text' id="Task_start" name="Task_start"class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datepicker_start').datetimepicker();
+                                        });
+                                    </script>
+                                </div>
+                            </div>
                             @Html.ValidationMessageFor(model => model.Task.start, "", new { @class = "text-danger" })
                         </div>
                     </div>

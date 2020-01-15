@@ -3,6 +3,24 @@
 @{
     ViewBag.Title = "Users";
 }
+<!-- nav-->
+<div class="container-fluid">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/Index">Admin</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/Complaints">Complaints</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/Admin/Users">Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Admin/HouseRules">House Rules</a>
+        </li>
+    </ul>
+</div>
+
 <div class="container-fluid">
     <h2 class="custom-page-header edit">Users</h2>
 
@@ -51,11 +69,18 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Role)
                 </td>
-                <td>
-                    @Html.ActionLink("Delete", "DeleteUser", new { id = item.StudentID })
-                </td>
+                @if (item.Username != "admin")
+                {
+                    <td>
+
+                        @Html.ActionLink("Edit", "EditUser", new { id = item.StudentID })  |
+                        @Html.ActionLink("Delete", "DeleteUser", new { id = item.StudentID })
+                    </td>
+                }
             </tr>
+
         }
 
     </table>
 </div>
+

@@ -13,7 +13,9 @@ nav {
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 30px;
 }
-
+.nav-tabs{
+    margin-bottom: 3%;
+}
 .logo {
     color: rgb(158, 157, 157);
     text-transform: uppercase;

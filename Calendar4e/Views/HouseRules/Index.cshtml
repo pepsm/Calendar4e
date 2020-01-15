@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Calendar4e.Models.HouseRule>
+﻿@model Calendar4e.Models.HouseViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -11,33 +11,25 @@
 
         <table class="table">
             <tr>
+                <th>@Html.DisplayNameFor(model => model.houseRule.ID)</th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.houseRule.Description)
                 </th>
                 <th></th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.listRules)
             {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
 
-            <!-- Edit/Delete/Create buttons will only be visible to admin -->
-            @if (Session["Role"] == "Admin")
-            {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            }
+        
 
-        </tr>
+                </tr>
             }
         </table>
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
 
     </div>

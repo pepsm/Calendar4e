@@ -1,5 +1,8 @@
 ﻿using Calendar4e.Data;
 using Calendar4e.Models;
+using EntityFramework.Extensions;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -21,6 +24,44 @@ namespace Calendar4e.Controllers
         public ActionResult Complaints()
         {
             return View(db.Complaints.ToList());
+        }
+
+        // GET: /EditUser/5
+        public ActionResult EditUser(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Student student = db.Students.Find(id);
+            if (@student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(@student);
+        }
+
+        // POST: /EditUser/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUser([Bind(Include = "StudentID,Username,Password,ThemeColor, EnrollmentDate, Role")] Student @student)
+        {
+
+            if (ModelState.IsValid)
+            {
+                
+                db.Students.Where(x => x.StudentID == student.StudentID)
+                .Update(u => new Student()
+                {
+                    Username = student.Username,
+                    ThemeColor = student.ThemeColor
+                });
+                 
+                db.SaveChanges();
+                
+                return RedirectToAction("Users", "Admin");
+            }
+            return View(@student);
         }
 
         // GET: /DeleteComplaint/5
@@ -78,10 +119,50 @@ namespace Calendar4e.Controllers
 
 
         //GET: /Admin/Users
-
         public ActionResult Users()
         {
             return View(db.Students.ToList());
+        }
+
+        //GET: /Admin/HouseRules
+        public ActionResult HouseRules()
+        {
+            HouseViewModel hrModel = new HouseViewModel();
+
+            hrModel.listRules = db.HouseRules.ToList();
+            hrModel.houseRule = new HouseRule();
+            return View(hrModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRule([Bind(Include = "Description")] HouseRule houseRule)
+        {
+            if (ModelState.IsValid)
+            {
+                db.HouseRules.Add(houseRule);
+                db.SaveChanges();
+                return RedirectToAction("HouseRules");
+            }
+
+            return View("HouseRules");
+        }
+
+        //GET: /Admin/DeleteRule/5
+        public ActionResult DeleteRule(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            HouseRule @houseRule = db.HouseRules.Find(id);
+            if (@houseRule == null)
+            {
+                return HttpNotFound();
+            }
+            db.HouseRules.Remove(@houseRule);
+            db.SaveChanges();
+            return RedirectToAction("HouseRules", "Admin");
         }
         protected override void Dispose(bool disposing)
         {
