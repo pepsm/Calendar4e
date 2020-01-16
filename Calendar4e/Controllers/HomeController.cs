@@ -102,7 +102,6 @@ namespace Calendar4e.Controllers
             return View();
         }
 
-
         private Student GetStudentByName(string name)
         {
             foreach (var s in db.Students.ToList())

@@ -1,6 +1,7 @@
 ﻿using Calendar4e.Data;
 using Calendar4e.Models;
 using EntityFramework.Extensions;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -163,6 +164,40 @@ namespace Calendar4e.Controllers
             db.HouseRules.Remove(@houseRule);
             db.SaveChanges();
             return RedirectToAction("HouseRules", "Admin");
+        }
+
+        public ActionResult Logout()
+        {
+            Session["Username"] = null;
+            Session.Abandon();
+            return RedirectToAction("Login", "Home");
+
+        }
+
+        public JsonResult GetChartInfo()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            db.Configuration.LazyLoadingEnabled = false;
+            
+
+
+           List<Chart> items = new List<Chart>();
+
+            var students = db.Students;
+
+            foreach (var s in students)
+            {
+                if(s.Role != RoleType.Admin.ToString())
+                {
+                    double count = (double)db.Tasks.Where(t => t.Student.Username == s.Username).Count();
+                    items.Add(new Chart(count, s.Username));
+                }
+            }
+
+            var json = items.ToArray();
+
+            return Json(json, JsonRequestBehavior.AllowGet);
+
         }
         protected override void Dispose(bool disposing)
         {

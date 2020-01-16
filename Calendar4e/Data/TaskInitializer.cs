@@ -21,9 +21,9 @@ namespace Calendar4e.Data
           
             var tasks = new List<Task>
                 {
-                    new Task{subject="Clean the room",Student = students.Single(s => s.Username == "username"), description="Koko should clean his room!", start=DateTime.Parse("2020-01-07 12:00").ToString("yyyy-MM-ddThh:mm"), end=DateTime.Parse("2020-01-08 13:00").ToString("yyyy-MM-ddThh:mm"), allDay = true},
-                    new Task{subject="Cook",Student = students.Single(s => s.Username == "username"), description="Gosho will cook tonight", start=DateTime.Parse("2020-01-09").ToString("yyyy-MM-dd"), end=DateTime.Parse("2020-01-10").ToString("yyyy-MM-dd"), allDay = true},
-                    new Task{subject="Wash the dishes",Student = students.Single(s => s.Username == "username"),description="description", start=DateTime.Parse("2020-01-22").ToString("yyyy-MM-dd"), end=DateTime.Parse("2020-01-23").ToString("yyyy-MM-dd"), allDay = true},
+                    new Task{subject="Clean the room",Student = students.Single(s => s.Username == "username"), description="Koko should clean his room!", start=DateTime.Parse("2020-01-07 12:00").ToString("yyyy-MM-dd hh:mm"), end=DateTime.Parse("2020-01-08 13:00").ToString("yyyy-MM-dd hh:mm"), allDay = false},
+                    new Task{subject="Cook",Student = students.Single(s => s.Username == "username"), description="Gosho will cook tonight", start=DateTime.Parse("2020-01-09 13:00").ToString("yyyy-MM-dd hh:mm"), end=DateTime.Parse("2020-01-10 14:00").ToString("yyyy-MM-dd hh:mm"), allDay = false},
+                    new Task{subject="Wash the dishes",Student = students.Single(s => s.Username == "username"),description="description", start=DateTime.Parse("2020-01-22 16:43").ToString("yyyy-MM-dd hh:mm"), end=DateTime.Parse("2020-01-23 18:00").ToString("yyyy-MM-dd hh:mm"), allDay = false}
                 };
             tasks.ForEach(t => context.Tasks.Add(t));
             context.SaveChanges();
