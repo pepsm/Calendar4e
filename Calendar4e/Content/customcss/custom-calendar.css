@@ -4,9 +4,9 @@
     font-family:'Arial Rounded MT';
     font-size: 14px;
     text-align: center;
-    color: whitesmoke;
+    color: white;
+   
 }
-
 .text-warning {
     color: rgba(240, 1, 1, 0.71);
     font-size: 14px;

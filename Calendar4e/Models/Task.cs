@@ -22,7 +22,7 @@ namespace Calendar4e.Models
         
         public bool allDay { get; set; } = false;
 
-        public String color { get; set; } = "rgb(128, 128, 128)";
+        public String color { get; set; } = "rgba(128, 128, 128, 0.9)";
         public virtual Student Student { get; set; }
 
     }

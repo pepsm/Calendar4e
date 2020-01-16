@@ -18,5 +18,7 @@ namespace Calendar4e.Models
         public String Date { get; set; }
         public virtual Student Student { get; set; }
 
+        public bool IsPublic { get; set; }
+
     }
 }

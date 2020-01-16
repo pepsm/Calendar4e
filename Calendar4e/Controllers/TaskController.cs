@@ -1,7 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Calendar4e.Data;
 using Calendar4e.Models;
 
@@ -27,10 +29,14 @@ namespace Calendar4e.Controllers
         public JsonResult GetTasks()
         {
             db.Configuration.ProxyCreationEnabled = false;
-                
-            var tasks = db.Tasks.ToArray();
-        
-            return Json(tasks, JsonRequestBehavior.AllowGet);
+            db.Configuration.LazyLoadingEnabled = false;
+
+            var tasks = db.Tasks.Include("Student").Select(t => new { t.TaskID, t.subject, t.description, t.start, t.end, t.allDay,t.color,  t.Student});
+
+
+            var json = tasks.ToArray();
+
+            return Json(json, JsonRequestBehavior.AllowGet);
             
         }
 

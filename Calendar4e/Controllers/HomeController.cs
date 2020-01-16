@@ -10,8 +10,14 @@ namespace Calendar4e.Controllers
 {
     public class HomeController : Controller
     {
-        private TaskContext db = new TaskContext();
+        private readonly TaskContext db = new TaskContext();
         public ActionResult Login()
+        {
+            return View();
+        }
+
+        // GET: Home/Unauthorized
+        public ActionResult Unauthorized()
         {
             return View();
         }
@@ -36,6 +42,14 @@ namespace Calendar4e.Controllers
                             Session["UserID"] = obj.StudentID.ToString();
                             Session["Username"] = obj.Username.ToString();
                             Session["Student"] = obj;
+                            Session["Role"] = obj.Role;
+
+                            // If Admin redirect to AdminController
+                            if(obj.Role == RoleType.Admin.ToString())
+                            {
+                                return RedirectToAction("Index", "Admin");
+                            }
+
                             return RedirectToAction("Index", "Task");
                         }
                     }
@@ -67,6 +81,7 @@ namespace Calendar4e.Controllers
                             Password = Hashing.HashPassword(student.Password),
                             EnrollmentDate = DateTime.Now.ToString("yyyy-MM-ddThh:mm tt"),
                             ThemeColor = "purple",
+                            Role = RoleType.User.ToString(),
                             IsActive = true
                         };
 
@@ -86,7 +101,6 @@ namespace Calendar4e.Controllers
             }
             return View();
         }
-
 
         private Student GetStudentByName(string name)
         {

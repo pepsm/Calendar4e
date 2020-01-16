@@ -21,10 +21,6 @@
                 @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Student.Username)
-            </th>
-
-            <th>
                 @Html.DisplayNameFor(model => model.DirectedToUser)
             </th>
             <th>
@@ -34,26 +30,31 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Student.Username)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DirectedToUser)
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
+            if (item.IsPublic)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DirectedToUser)
+                    </td>
+                    @if (Session["Username"].ToString() == (item.Student.Username))
+                    {
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    }
+                </tr>
+    
+            }
         }
 
     </table>

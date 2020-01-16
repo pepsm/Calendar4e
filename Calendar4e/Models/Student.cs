@@ -23,7 +23,7 @@ namespace Calendar4e.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public string EnrollmentDate { get; set; }
         public bool IsActive { get; set; }
-
+        public string Role { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
     }
 }

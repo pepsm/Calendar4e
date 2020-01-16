@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Calendar4e.Models
 {
-    public class Rule
+    public class HouseRule
     {
         [Key]
         public int ID { get; set; }
